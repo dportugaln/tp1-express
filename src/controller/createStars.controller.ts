@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
-export async function createStarController(req: Request, res: Response) {
-    const { id, name, type, distancia, mass, radius, temperature, luminosity, age, composition, stellar_history } = req.body
-    if (!id || !name || !type || !distancia || !mass || !radius || !temperature || !luminosity || !age || !composition || !stellar_history) {
-        res.status(400).json({
-            error: 'BAD_REQUEST',
-            message: 'There are missing params for this request'
-        })
+export async function createStarController(req: Request, res: Response, next: NextFunction)  {
+    //prueba de error en post    
+    try {
+            throw new Error('Unauthorized')
+
+        } catch (error) {
+            next(error)
+        }
     }
-}
